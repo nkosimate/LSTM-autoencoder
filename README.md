@@ -1,6 +1,6 @@
 # LSTM-autoencoder
 
-Kick Detection Using LSTM Autoencoder Networks
+Early Kick Prediction Using LSTM Autoencoder Networks
 
 Kick detection is a critical safety concern in oil and gas drilling operations. Undetected kicks can lead to dangerous explosions, environmental damage, property loss, and harm to human life. This repository contains the implementation of a novel approach for kick detection using Long Short-Term Memory Autoencoder (LSTM-AE) networks—a type of recurrent neural network designed for sequential and time-dependent data analysis.
 
