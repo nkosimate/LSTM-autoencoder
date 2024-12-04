@@ -18,7 +18,7 @@ model = keras.models.load_model('/Users/nkosimate/Desktop/MSc LSTM-AE working.ke
 
 def dataset_to_sequence(data):
     data = data.drop(df.columns[0], axis=1)
-    data = data.drop(columns=['TIME','ARAMCO BLOCK POSITION (SURFACE)','ARAMCO FLOW IN (SURFACE)','ARAMCO DEPTH (SURFACE)','ARAMCO RPM (SURFACE)'])
+    data = data.drop(columns=['TIME',' BLOCK POSITION (SURFACE)',' FLOW IN (SURFACE)',' DEPTH (SURFACE)',' RPM (SURFACE)'])
     
     # Normalize the data
     scaler = MinMaxScaler()
@@ -39,7 +39,7 @@ def dataset_to_sequence(data):
 #usign the model
 def use_model(df,X,autoencoder):
     data = df.drop(df.columns[0], axis=1)
-    data = data.drop(columns=['TIME','ARAMCO BLOCK POSITION (SURFACE)','ARAMCO FLOW IN (SURFACE)','ARAMCO DEPTH (SURFACE)','ARAMCO RPM (SURFACE)'])
+    data = data.drop(columns=['TIME',' BLOCK POSITION (SURFACE)',' FLOW IN (SURFACE)',' DEPTH (SURFACE)',' RPM (SURFACE)'])
     
     # Normalize the data
     scaler = MinMaxScaler()
@@ -65,8 +65,8 @@ def use_model(df,X,autoencoder):
 def plotgraph1(df_a,df_r):
      # Clear the current figure
     plt.figure(figsize=(5, 3))
-    plt.plot(df_a['ARAMCO FLOW OUT (SURFACE)'], label='Actual')
-    plt.plot(df_r['ARAMCO FLOW OUT (SURFACE)'], label='Predicted')
+    plt.plot(df_a[' FLOW OUT (SURFACE)'], label='Actual')
+    plt.plot(df_r[' FLOW OUT (SURFACE)'], label='Predicted')
 
     plt.xlabel('Index')
     plt.ylabel('Values')
@@ -79,8 +79,8 @@ def plotgraph1(df_a,df_r):
 def plotgraph2(df_a,df_r):
      # Clear the current figure
     plt.figure(figsize=(5, 3))  
-    plt.plot(df_a['ARAMCO TVA (SURFACE)'], label='Actual')
-    plt.plot(df_r['ARAMCO TVA (SURFACE)'], label='Predicted')
+    plt.plot(df_a[' TVA (SURFACE)'], label='Actual')
+    plt.plot(df_r[' TVA (SURFACE)'], label='Predicted')
     plt.xlabel('Index')
     plt.ylabel('Values')
     plt.title('Actual TVA vs Predicted TVA')
@@ -91,8 +91,8 @@ def plotgraph2(df_a,df_r):
 def plotgraph3(df_a,df_r):
      # Clear the current figure
     plt.figure(figsize=(5, 3))
-    plt.plot(df_a['ARAMCO SPP (SURFACE)'], label='Actual')
-    plt.plot(df_r['ARAMCO SPP (SURFACE)'], label='Predicted')
+    plt.plot(df_a[' SPP (SURFACE)'], label='Actual')
+    plt.plot(df_r[' SPP (SURFACE)'], label='Predicted')
     plt.xlabel('Index')
     plt.ylabel('Values')
     plt.title('Actual SPP vs Predicted SPP')
@@ -103,8 +103,8 @@ def plotgraph3(df_a,df_r):
 def plotgraph4(df_a,df_r):
      # Clear the current figure
     plt.figure(figsize=(5, 3))
-    plt.plot(df_a['ARAMCO ROP (SURFACE)'], label='Actual')
-    plt.plot(df_r['ARAMCO ROP (SURFACE)'], label='Predicted')
+    plt.plot(df_a[' ROP (SURFACE)'], label='Actual')
+    plt.plot(df_r[' ROP (SURFACE)'], label='Predicted')
     plt.xlabel('Index')
     plt.ylabel('Values')
     plt.title('Actual ROP vs Predicted ROP')
@@ -113,21 +113,21 @@ def plotgraph4(df_a,df_r):
     return plt.gcf()
 
 def show_possible_kick(drilling_df):
-    drilling_df['flow_rate_prev'] = drilling_df['ARAMCO FLOW OUT (SURFACE)'].shift(2)
-    drilling_df['TVA_prev'] = drilling_df['ARAMCO TVA (SURFACE)'].shift(2)
-    drilling_df['ROP_prev'] = drilling_df['ARAMCO ROP (SURFACE)'].shift(2)
-    drilling_df['SPP_prev'] = drilling_df['ARAMCO SPP (SURFACE)'].shift(2)
-    drilling_df['WOB_prev'] = drilling_df['ARAMCO WOB (SURFACE)'].shift(2)
-    drilling_df['Flow_in_prev'] = drilling_df['ARAMCO FLOW IN (SURFACE)'].shift(2)
-    drilling_df['Hookload_prev'] = drilling_df['ARAMCO HOOKLOAD (SURFACE)'].shift(2)
+    drilling_df['flow_rate_prev'] = drilling_df[' FLOW OUT (SURFACE)'].shift(2)
+    drilling_df['TVA_prev'] = drilling_df[' TVA (SURFACE)'].shift(2)
+    drilling_df['ROP_prev'] = drilling_df[' ROP (SURFACE)'].shift(2)
+    drilling_df['SPP_prev'] = drilling_df[' SPP (SURFACE)'].shift(2)
+    drilling_df['WOB_prev'] = drilling_df[' WOB (SURFACE)'].shift(2)
+    drilling_df['Flow_in_prev'] = drilling_df[' FLOW IN (SURFACE)'].shift(2)
+    drilling_df['Hookload_prev'] = drilling_df[' HOOKLOAD (SURFACE)'].shift(2)
 
-    drilling_df['flow_rate_change'] = ((drilling_df['ARAMCO FLOW OUT (SURFACE)']- drilling_df['flow_rate_prev'])/drilling_df['flow_rate_prev']) * 100
-    drilling_df['TVA_change'] = (drilling_df['ARAMCO TVA (SURFACE)']-drilling_df['TVA_prev'])
-    drilling_df['ROP_change'] = ((drilling_df['ARAMCO ROP (SURFACE)']-drilling_df['ROP_prev'])/drilling_df['ROP_prev']) *100
-    drilling_df['SPP_change'] = ((drilling_df['ARAMCO SPP (SURFACE)'] - drilling_df['SPP_prev'])/drilling_df['SPP_prev']) *100
-    drilling_df['WOB_change'] = ((drilling_df['ARAMCO WOB (SURFACE)'] - drilling_df['WOB_prev'])/drilling_df['WOB_prev']) *100
-    drilling_df['Flow_in_change'] = ((drilling_df['ARAMCO FLOW IN (SURFACE)'] - drilling_df['Flow_in_prev'])/drilling_df['Flow_in_prev']) *100
-    drilling_df['Hookload_change'] = ((drilling_df['ARAMCO HOOKLOAD (SURFACE)'] - drilling_df['Hookload_prev'])/drilling_df['Hookload_prev']) *100
+    drilling_df['flow_rate_change'] = ((drilling_df[' FLOW OUT (SURFACE)']- drilling_df['flow_rate_prev'])/drilling_df['flow_rate_prev']) * 100
+    drilling_df['TVA_change'] = (drilling_df[' TVA (SURFACE)']-drilling_df['TVA_prev'])
+    drilling_df['ROP_change'] = ((drilling_df[' ROP (SURFACE)']-drilling_df['ROP_prev'])/drilling_df['ROP_prev']) *100
+    drilling_df['SPP_change'] = ((drilling_df[' SPP (SURFACE)'] - drilling_df['SPP_prev'])/drilling_df['SPP_prev']) *100
+    drilling_df['WOB_change'] = ((drilling_df[' WOB (SURFACE)'] - drilling_df['WOB_prev'])/drilling_df['WOB_prev']) *100
+    drilling_df['Flow_in_change'] = ((drilling_df[' FLOW IN (SURFACE)'] - drilling_df['Flow_in_prev'])/drilling_df['Flow_in_prev']) *100
+    drilling_df['Hookload_change'] = ((drilling_df[' HOOKLOAD (SURFACE)'] - drilling_df['Hookload_prev'])/drilling_df['Hookload_prev']) *100
 
     # Initialize the score
     drilling_df['score'] = 0
